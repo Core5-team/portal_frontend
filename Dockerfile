@@ -1,6 +1,6 @@
 FROM nginx:alpine
 
-RUN echo "<h1>Hello Cloud Run! Try #1</h1>" > /usr/share/nginx/html/index.html
+COPY index.html /usr/share/nginx/html/index.html
 
 RUN rm /etc/nginx/conf.d/default.conf
 
