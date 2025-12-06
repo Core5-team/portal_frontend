@@ -34,8 +34,9 @@ In index.html, update:
 These should point to the two AWS environments required by the project.
 
 ### Local Build (Optional)
-```docker build -t explore-hub .```
-```docker run -p 8080:8080 -e PORT=8080 explore-hub```
+
+`docker build -t explore-hub .`
+`docker run -p 8080:8080 -e PORT=8080 explore-hub`
 
 ### Notes
 
