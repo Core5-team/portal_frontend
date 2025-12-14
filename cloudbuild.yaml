@@ -1,0 +1,21 @@
+options:
+  logging: CLOUD_LOGGING_ONLY
+
+steps:
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["build", "-t", "$_IMAGE:$SHORT_SHA", "."]
+
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["push", "$_IMAGE:$SHORT_SHA"]
+
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+    entrypoint: "bash"
+    args:
+      - "-c"
+      - |
+        gcloud run deploy $_CLOUD_RUN_SERVICE \
+          --image $_IMAGE:$SHORT_SHA \
+          --region $_CLOUD_RUN_REGION \
+          --platform managed \
+          --service-account $_CLOUD_RUN_SA \
+          --allow-unauthenticated
